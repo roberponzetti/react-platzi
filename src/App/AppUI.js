@@ -1,10 +1,12 @@
 import React, { useContext } from 'react'
 import { TodoContext } from '../context/TodoContext';
-import { CreateTodoButton } from '../Components/CreateTodoButton';
-import { TodoCounter } from '../Components/TodoCounter';
-import { TodoItem } from '../Components/TodoItem';
-import { TodoList } from '../Components/TodoList';
-import { TodoSearch } from '../Components/TodoSearch';
+import { CreateTodoButton } from '../components/CreateTodoButton';
+import { TodoCounter } from '../components/TodoCounter';
+import { TodoItem } from '../components/TodoItem';
+import { TodoList } from '../components/TodoList';
+import { TodoSearch } from '../components/TodoSearch';
+import { Modal } from '../modal/Modal';
+import TodoForm from '../components/TodoForm';
 
 const AppUI = () => {
   
@@ -14,6 +16,8 @@ const AppUI = () => {
     searchedTodos, 
     completeTodo, 
     deleteTodo,
+    openModal,
+    setOpenModal,
   }  = useContext(TodoContext);
 
   return (
@@ -34,7 +38,14 @@ const AppUI = () => {
           />
         ))}
       </TodoList>
-      <CreateTodoButton />
+      {/* uso la doble negacion para verificar no solo que exista, sino que sea true */}
+      {!!openModal && (
+        <Modal>
+          <TodoForm />
+        </Modal>
+      )}
+      
+      <CreateTodoButton setOpenModal={setOpenModal} />
     </>
   )
 }

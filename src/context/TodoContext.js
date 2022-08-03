@@ -13,6 +13,7 @@ const TodoProvider = (props) => {
   } = useLocalStorage('TODOS_V1', []); // custom hook
   
   const [searchValue, setSearchValue] = useState('');
+  const [openModal, setOpenModal] = useState(false);
 
   const completedTodos = todos.filter(todo => !!todo.completed).length;
   const totalTodos = todos.length;
@@ -36,6 +37,15 @@ const TodoProvider = (props) => {
     saveTodos(newTodos);
   }
 
+  const addTodo = (text) => {
+    const newTodos = [...todos];
+    newTodos.push({
+      completed: false,
+      text,
+    });
+    saveTodos(newTodos);
+  }
+
   const deleteTodo = (text) => {
     const todoIndex = todos.findIndex(todo => todo.text === text);
     const newTodos = [...todos];
@@ -53,7 +63,10 @@ const TodoProvider = (props) => {
       setSearchValue,
       searchedTodos,
       completeTodo,
+      addTodo,
       deleteTodo,
+      openModal,
+      setOpenModal,
     }}>
       {props.children}
     </TodoContext.Provider>
