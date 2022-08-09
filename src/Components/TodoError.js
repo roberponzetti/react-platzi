@@ -6,4 +6,4 @@ const TodoError = ({error}) => {
   )
 }
 
-export {TodoError}
+export { TodoError }
