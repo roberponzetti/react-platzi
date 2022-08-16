@@ -17,21 +17,26 @@ import { ChangeAlert } from '../components/ChangeAlert/ChangeAlert';
 
 function App() {
 
+  const {state, stateUpdaters} = useTodos();
+
   const {
     error, 
     loading, 
     searchedTodos, 
-    completeTodo, 
-    deleteTodo,
-    openModal,
-    addTodo,
-    setOpenModal,
     totalTodos, 
+    completeTodo, 
     completedTodos,
+    openModal,
     searchValue, 
+  } = state;
+
+  const {
+    setOpenModal,
+    addTodo,
+    deleteTodo,
     setSearchValue,
     synchronizeTodos,
-  }  = useTodos();
+  }  = stateUpdaters;
 
   return (
     <>
